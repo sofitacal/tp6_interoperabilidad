@@ -3,9 +3,18 @@ from fhir.resources.humanname import HumanName
 from fhir.resources.contactpoint import ContactPoint
 
 # Crear el recurso FHIR de paciente con parámetros opcionales
-def create_patient_resource(family_name=None, given_name=None, birth_date=None, gender=None, phone=None):
+def create_patient_resource(family_name=None, given_name=None, birth_date=None, gender=None, phone=None, document_number=None,
+                            document_system="http://www.renaper.gob.ar/dni"):
     patient = Patient()
-    
+
+# Agregar el DNI como identifier si está disponible
+    if document_number:
+        identifier = Identifier()
+        identifier.use = "official"
+        identifier.system = document_system
+        identifier.value = document_number
+        patient.identifier = [identifier]
+
     # Agregar el nombre del paciente si está disponible
     if family_name or given_name:
         name = HumanName()
