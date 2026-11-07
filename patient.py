@@ -1,6 +1,7 @@
 from fhir.resources.patient import Patient
 from fhir.resources.humanname import HumanName
 from fhir.resources.contactpoint import ContactPoint
+from fhir.resources.identifier import Identifier
 
 # Crear el recurso FHIR de paciente con parámetros opcionales
 def create_patient_resource(family_name=None, given_name=None, birth_date=None, gender=None, phone=None, document_number=None,
