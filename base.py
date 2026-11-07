@@ -9,6 +9,7 @@ def send_resource_to_hapi_fhir(resource,resource_type):
     resource_json = resource.json()
 
     response = requests.post(url, headers=headers, data=resource_json)
+    print("Método:", response.request.method, "| URL final:", response.url, "| Redirecciones:", response.history)
 
     if response.status_code == 201:
         print("Recurso creado exitosamente")
