@@ -1,5 +1,6 @@
 from patient import create_patient_resource
 from base import send_resource_to_hapi_fhir, get_resource_from_hapi_fhir, search_patient_by_document
+from procedure import create_procedure_resource
 
 if __name__ == "__main__":
     dni = "44345123"  
@@ -17,3 +18,9 @@ if __name__ == "__main__":
 
         # 3b: buscarlo por documento
         search_patient_by_document(dni)
+        # 3c: crear un Procedure asociado al paciente y leerlo
+        procedure = create_procedure_resource(patient_id)
+        procedure_id = send_resource_to_hapi_fhir(procedure, "Procedure")
+
+        if procedure_id:
+            get_resource_from_hapi_fhir(procedure_id, "Procedure")
